@@ -3,12 +3,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# 엑셀 파일을 읽어옵니다.
-file_path = "genus_bar_chart.xlsx"
-data = pd.read_excel(file_path)
-
+# load tsv file
 tsv_file_path = "genus_bar_chart.tsv"
-data.to_csv(tsv_file_path, sep='\t', index=False)
+data = pd.read_csv(tsv_file_path, sep='\t')
 
 # id 별 Family의 비율을 계산합니다.
 pivot_data = data.groupby(['id', 'Family']).size().unstack().div(data.groupby('id').size(), axis=0).fillna(0)
